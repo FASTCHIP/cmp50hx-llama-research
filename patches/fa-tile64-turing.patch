@@ -1,0 +1,32 @@
+diff --git a/ggml/src/ggml-cuda/fattn.cu b/ggml/src/ggml-cuda/fattn.cu
+index ceb47279..9b545d2f 100644
+--- a/ggml/src/ggml-cuda/fattn.cu
++++ b/ggml/src/ggml-cuda/fattn.cu
+@@ -1,3 +1,5 @@
++#include <cstdlib>
++
+ #include "common.cuh"
+ #include "fattn-common.cuh"
+ #include "fattn-mma-f16.cuh"
+@@ -157,7 +159,20 @@ static void ggml_cuda_flash_attn_ext_mma_f16_switch_ncols1(ggml_backend_cuda_con
+         }
+     }
+ 
+-    if (Q->ne[1] <= 32/ncols2 || (GGML_CUDA_CC_IS_NVIDIA(cc) && ggml_cuda_highest_compiled_arch(cc) == GGML_CUDA_CC_TURING) ||
++    // [FA-TILE64] On Turing the 32-wide Q tile only wins while the KV cache is short: with
++    // head_dim 256 the 64-wide tile stops spilling once the KV is long enough (upstream issue
++    // #28761: crossover between 8K and 10K, +19% prefill at 32K, +50% at 230K on the same class
++    // of hardware). GGML_FA_TILE64_MIN_KV=<n> selects the 64-wide tile from KV length n onwards;
++    // unset or 0 keeps upstream behaviour (always 32-wide on Turing).
++    static const int fa_tile64_min_kv = []() -> int {
++        const char * env = std::getenv("GGML_FA_TILE64_MIN_KV");
++        return (env && *env) ? std::atoi(env) : 0;
++    }();
++    const bool turing_tile32 = GGML_CUDA_CC_IS_NVIDIA(cc) &&
++        ggml_cuda_highest_compiled_arch(cc) == GGML_CUDA_CC_TURING &&
++        !(fa_tile64_min_kv > 0 && dst->src[1]->ne[1] >= (int64_t) fa_tile64_min_kv);
++
++    if (Q->ne[1] <= 32/ncols2 || turing_tile32 ||
+             (GGML_CUDA_CC_IS_AMD(cc) && DKQ > 256)) {
+         ggml_cuda_flash_attn_ext_mma_f16_case<DKQ, DV, 32/ncols2, ncols2>(ctx, dst);
+         return;
