@@ -1,0 +1,4 @@
+Generating SQLite file /home/fastchip/cmp50hx-llama-research/nsight/nsys-pp-20260922T140811Z.sqlite from /home/fastchip/cmp50hx-llama-research/nsight/nsys-pp-20260922T140811Z.nsys-rep
+Processing [/home/fastchip/cmp50hx-llama-research/nsight/nsys-pp-20260922T140811Z.sqlite] with [/opt/nvidia/nsight-systems/2024.6.2/host-linux-x64/reports/cuda_gpu_kern_sum.py]... 
+SKIPPED: /home/fastchip/cmp50hx-llama-research/nsight/nsys-pp-20260922T140811Z.sqlite does not contain CUDA kernel data.
+

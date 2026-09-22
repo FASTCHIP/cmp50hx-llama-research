@@ -6,7 +6,8 @@
 - Активный основной сервис: `llama-qwen.service`, health `:8081` = 200; профиль `profiles/current-selected.service` (НЕ менялся — tensor не продвигался).
 - `llama-research.service`: inactive. `bonsai-2.service`: active, health `:8082` = 200.
 - GPU: 4/4; GPU0–2 Gen2 x8, GPU3 Gen2 x4; Xid текущей загрузки 0.
-- Итог по tensor: на `--parallel 1` быстрее layer по всем осям (p192k dec +87.7%, p250k dec +97.1%, soak +54.1%, conc1 +82.2%), но проигрывает масштабирование при 2+ клиентах (conc5 −33.5%).
+- Поправка: штатный профиль использует --parallel 5, варианты кампании шли на --parallel 1. Итог по tensor (однослотовый режим): быстрее layer по всем осям (p192k dec +87.7%, p250k dec +97.1%, soak +54.1%, conc1 +82.2%), но проигрывает масштабирование при 2+ клиентах (conc5 −33.5%).
 - row-mode: ОПРОВЕРГНУТ — `device CUDA0 does not support split buffers` при загрузке модели.
-- Незакрыто: CUDA 12.0 build matrix, Nsight, profiler-driven patches, clock sweep, elastic 256K.
+- Elastic 256K: ОПРОВЕРГНУТО — прод отклоняет запрос >65536 токенов (exceed_context_size_error), эластичности нет. См. summaries/ELASTIC-256K-FINDING.md
+- Незакрыто: CUDA 12.0 build matrix (в работе), Nsight profiling, profiler-driven patches, clock sweep.
 - Вернуться к baseline: `sudo -n cp $R/rollback/llama-qwen.service.initial /etc/systemd/system/llama-qwen.service 2>/dev/null || sudo -n cp /home/fastchip/cmp50hx-llama-research/rollback/llama-qwen.service.initial /etc/systemd/system/llama-qwen.service && sudo -n systemctl daemon-reload && sudo -n systemctl restart llama-qwen.service`
