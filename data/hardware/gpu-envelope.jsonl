@@ -1,0 +1,3 @@
+{"gpu":0,"name":"NVIDIA CMP 50HX","d2d_GiBs":231.261113,"fp32_TFLOPs":12.384899,"fp16_tensor_TFLOPs":87.062324,"int8_dp4a_TOPS":44.156015,"d2d_ms":108.102913,"fp32_ms":887.784058,"fp16_ms":126.290176,"dp4a_ms":0.778144}
+{"gpu":1,"name":"NVIDIA CMP 50HX","d2d_GiBs":231.746940,"fp32_TFLOPs":12.148667,"fp16_tensor_TFLOPs":86.550314,"int8_dp4a_TOPS":44.256114,"d2d_ms":107.876289,"fp32_ms":905.047119,"fp16_ms":127.037277,"dp4a_ms":0.776384}
+{"gpu":2,"name":"NVIDIA CMP 50HX","d2d_GiBs":231.272212,"fp32_TFLOPs":12.892643,"fp16_tensor_TFLOPs":91.560410,"int8_dp4a_TOPS":47.330591,"d2d_ms":108.097725,"fp32_ms":852.820984,"fp16_ms":120.085922,"dp4a_ms":0.725952}

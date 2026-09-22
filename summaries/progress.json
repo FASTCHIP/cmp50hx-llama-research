@@ -1,0 +1,10 @@
+{
+  "campaign_start_utc": "2026-09-21T21:52:58Z",
+  "minimum_end_utc": "2026-09-22T05:52:58Z",
+  "phase": "final",
+  "elapsed_seconds": 37219,
+  "last_result": "minimum duration reached; final validation",
+  "next_step": "continue plan matrix",
+  "hard_stop": null,
+  "updated_epoch": 1790064797
+}
