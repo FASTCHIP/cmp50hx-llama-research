@@ -1,0 +1,8 @@
+=== PPL: порог выключен ===
+2.40.856.009 I perplexity: calculating perplexity over 20 chunks, n_ctx=2048, batch_size=2048, n_seq=1
+3.35.560.049 I Final estimate: PPL = 6.0051 +/- 0.10074
+=== PPL: порог 256 ===
+2.26.892.212 I perplexity: calculating perplexity over 20 chunks, n_ctx=2048, batch_size=2048, n_seq=1
+3.30.388.344 I Final estimate: PPL = 6.0092 +/- 0.10102
+=== quality gate done ===
+{"status":"ok"}

@@ -1,0 +1,13 @@
+2026-09-23T08:04:10+03:00 === mmq campaign start stamp=20260923T050410Z ===
+2026-09-23T08:04:10+03:00 phase=mmq-gates
+2026-09-23T08:11:47+03:00 arm=mmq-gates PASS
+2026-09-23T08:11:47+03:00 phase=mmq-ctl-ub512
+2026-09-23T08:42:28+03:00 arm=mmq-ctl-ub512 PASS
+2026-09-23T08:42:28+03:00 phase=mmq-thr256-ub512
+2026-09-23T09:12:02+03:00 arm=mmq-thr256-ub512 PASS
+2026-09-23T09:12:02+03:00 phase=mmq-ctl2-ub512
+2026-09-23T09:25:57+03:00 arm=mmq-ctl2-ub512 PASS
+2026-09-23T09:25:57+03:00 phase=mmq-cublas-ref
+2026-09-23T09:39:52+03:00 arm=mmq-cublas-ref PASS
+2026-09-23T09:39:52+03:00 phase=done
+2026-09-23T09:39:52+03:00 === mmq campaign complete ===

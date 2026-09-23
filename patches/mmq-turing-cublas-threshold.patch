@@ -1,0 +1,75 @@
+diff --git a/ggml/src/ggml-cuda/mmq-turing-policy.h b/ggml/src/ggml-cuda/mmq-turing-policy.h
+new file mode 100644
+index 000000000..81c0d3117
+--- /dev/null
++++ b/ggml/src/ggml-cuda/mmq-turing-policy.h
+@@ -0,0 +1,35 @@
++// [TAG_MMQ_M_THRESHOLD] Policy for the Turing MMQ/cuBLAS threshold.
++// Pure C++ on purpose: the decision table is unit-tested on the host (tests/test_mmq_policy.cpp),
++// without a GPU, and used by ggml_cuda_should_use_mmq() in mmq.cu.
++#pragma once
++
++#include <cstdint>
++
++// Parse the opt-in threshold from an env string. Strict decimal digits only.
++// Returns false for unset/empty/zero/negative/non-numeric/absurd values.
++static inline bool ggml_cuda_mmq_m_threshold_parse(const char * env, int64_t * out) {
++    if (env == nullptr || env[0] == '\0' || out == nullptr) {
++        return false;
++    }
++    int64_t v = 0;
++    for (const char * p = env; *p != '\0'; ++p) {
++        if (*p < '0' || *p > '9') {
++            return false;
++        }
++        v = v * 10 + (*p - '0');
++        if (v > (int64_t) 1 << 40) {
++            return false;
++        }
++    }
++    if (v <= 0) {
++        return false;
++    }
++    *out = v;
++    return true;
++}
++
++// True when a dense matrix with M == ne11 should leave MMQ for cuBLAS.
++// Only Turing is redirected, and only when the user opted in with min_m > 0.
++static inline bool ggml_cuda_mmq_m_threshold_prefers_cublas(bool turing, int64_t n_experts, int64_t ne11, int64_t min_m) {
++    return min_m > 0 && turing && n_experts == 0 && ne11 >= min_m;
++}
+diff --git a/ggml/src/ggml-cuda/mmq.cu b/ggml/src/ggml-cuda/mmq.cu
+index b13b34ee9..d6b090fd5 100644
+--- a/ggml/src/ggml-cuda/mmq.cu
++++ b/ggml/src/ggml-cuda/mmq.cu
+@@ -1,5 +1,6 @@
+ #include "common.cuh"
+ #include "mmq.cuh"
++#include "mmq-turing-policy.h"
+ #include "quantize.cuh"
+ #include "mmid.cuh"
+ 
+@@ -316,6 +317,22 @@ bool ggml_cuda_should_use_mmq(enum ggml_type type, int cc, int64_t ne11, int64_t
+         }
+     }
+ 
++    // [TAG_MMQ_M_THRESHOLD] Turing keeps MMQ for small M (decode); large prefill matrices go to cuBLAS.
++    static const int64_t mmq_turing_cublas_min_m = []() -> int64_t {
++        const char * env = getenv("GGML_CUDA_TURING_CUBLAS_MIN_M");
++        int64_t v = 0;
++        if (env == nullptr || env[0] == '\0') {
++            return 0;
++        }
++        if (!ggml_cuda_mmq_m_threshold_parse(env, &v)) {
++            GGML_LOG_WARN("%s: invalid value '%s', threshold disabled\n", "GGML_CUDA_TURING_CUBLAS_MIN_M", env);
++            return 0;
++        }
++        return v;
++    }();
++    if (ggml_cuda_mmq_m_threshold_prefers_cublas(turing_mma_available(cc), n_experts, ne11, mmq_turing_cublas_min_m)) {
++        return false;
++    }
+     if (turing_mma_available(cc)) {
+         return true;
+     }
