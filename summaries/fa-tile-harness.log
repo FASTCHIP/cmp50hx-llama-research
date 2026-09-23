@@ -1,0 +1,11 @@
+2026-09-23T04:34:08+03:00 fa-tile A/B start stamp=20260923T013408Z bin32=/home/fastchip/fork-ab/llama-server-tile32 bin64=/home/fastchip/fork-ab/llama-server-tile64
+2026-09-23T04:34:08+03:00 start variant=a1-layer-tile32 bin=llama-server-tile32 cases=[short p32k p64k] split=--split-mode layer --tensor-split 1,1,1 -b 2048 -ub 512
+2026-09-23T05:07:02+03:00 variant=a1-layer-tile32 PASS
+2026-09-23T05:07:02+03:00 start variant=a2-layer-tile64 bin=llama-server-tile64 cases=[short p32k p64k] split=--split-mode layer --tensor-split 1,1,1 -b 2048 -ub 512
+2026-09-23T05:15:07+03:00 variant=a2-layer-tile64 recoverable_FAIL
+2026-09-23T05:15:07+03:00 start variant=b1-tensor-tile32 bin=llama-server-tile32 cases=[short p32k] split=--split-mode tensor --tensor-split 1,1,1 -b 2048 -ub 512
+2026-09-23T05:30:47+03:00 variant=b1-tensor-tile32 PASS
+2026-09-23T05:30:47+03:00 start variant=b2-tensor-tile64 bin=llama-server-tile64 cases=[short p32k] split=--split-mode tensor --tensor-split 1,1,1 -b 2048 -ub 512
+2026-09-23T05:38:27+03:00 variant=b2-tensor-tile64 recoverable_FAIL
+2026-09-23T05:38:43+03:00 bonsai-2 restored active
+2026-09-23T05:38:43+03:00 fa-tile A/B complete stamp=20260923T013408Z
