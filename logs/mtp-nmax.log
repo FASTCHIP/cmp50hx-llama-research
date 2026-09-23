@@ -1,0 +1,9 @@
+2026-09-23T16:33:01+03:00 === nmax sweep start stamp=20260923T131101Z (previous phase=done) ===
+2026-09-23T16:33:01+03:00 phase=mtp-n5
+2026-09-23T16:46:25+03:00 arm=mtp-n5 PASS
+2026-09-23T16:46:25+03:00 phase=mtp-n7
+2026-09-23T17:00:09+03:00 arm=mtp-n7 PASS
+2026-09-23T17:00:09+03:00 phase=mtp-n3b
+2026-09-23T17:13:07+03:00 arm=mtp-n3b PASS
+2026-09-23T17:13:07+03:00 phase=done
+2026-09-23T17:13:07+03:00 === nmax sweep complete ===
