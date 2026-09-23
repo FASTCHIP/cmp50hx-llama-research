@@ -89,7 +89,6 @@ PPL-gate: `layer/q8_0=6.0051`, `tensor/q8_0=5.9935` на одном корпус
 качества на 256K, при vision или новой реализации матриц. Первичный лог
 `~/cmp50hx-llama-research/logs/ppl-ab.log` на стенде.
 
-**План оптимизации и сборки** —
-[`docs/superpowers/plans/2026-09-23-qwen38-sm75-throughput.md`](../docs/superpowers/plans/2026-09-23-qwen38-sm75-throughput.md).
+**Планы:** [агентский план изменения MMQ/cuBLAS и тестов](../docs/superpowers/plans/2026-09-23-llama-mmq-agent-execution.md); [общая карта оптимизации](../docs/superpowers/plans/2026-09-23-qwen38-sm75-throughput.md).
 Исторический `FINAL-REPORT.md` относится только к ранней кампании и содержит
 пункты «не проверено», позже закрытые; не использовать как текущий вывод.
