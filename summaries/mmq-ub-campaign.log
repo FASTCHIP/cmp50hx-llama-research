@@ -1,0 +1,9 @@
+2026-09-23T11:22:13+03:00 === mmq ub campaign start stamp=20260923T082213Z ===
+2026-09-23T11:22:13+03:00 phase=mmq-ctl-ub2048
+2026-09-23T11:44:07+03:00 arm=mmq-ctl-ub2048 PASS
+2026-09-23T11:44:08+03:00 phase=mmq-thr256-ub2048
+2026-09-23T12:05:12+03:00 arm=mmq-thr256-ub2048 PASS
+2026-09-23T12:05:12+03:00 phase=mmq-ctl2-ub2048
+2026-09-23T12:27:10+03:00 arm=mmq-ctl2-ub2048 PASS
+2026-09-23T12:27:10+03:00 phase=done
+2026-09-23T12:27:10+03:00 === mmq ub campaign complete ===
