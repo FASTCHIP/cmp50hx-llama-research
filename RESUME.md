@@ -1,7 +1,22 @@
 # RESUME — состояние работ, 2026-09-24 (вечер) MSK
 
-## Самое свежее: три процесса + единая точка входа (24.09)
-Стенд перестроен: на каждой GPU 0/1/2 — **отдельный процесс** `qwen-gpu0/1/2.service`
+## Самое свежее: откат на llama-qwen.service (24.09, вечер)
+По решению владельца мультипроцессная схема снята. Работает **`llama-qwen.service`** — один
+`llama-server` на **:8081** (WebUI смотрит сюда же, `model=Qwen3.8-27B`, ключ тот же):
+`CUDA_VISIBLE_DEVICES=0,1,2`, `--split-mode layer --tensor-split 1.2,1.2,0.6`,
+`--parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144`, KV `q8_0`,
+`--cache-ram 16384`, `--cache-disk .../kvcache`, `--cache-disk-max 402400`,
+**`--spec-type draft-mtp --spec-draft-n-max 3`** (MTP включён флагами), mmproj offload,
+binary `llama.cpp-vbbb-mmq-thresh-6a4317e` + `GGML_CUDA_TURING_CUBLAS_MIN_M=256`.
+Юнит побайтово совпадает с эталоном `backups/llama-qwen.service.20260924`.
+Проверено: `/v1/models` → `Qwen3.8-27B` (n_ctx 262144), 4 слота × 262144, текст «Париж»,
+картинка «Синий», SSE 35 кадров + `[DONE]`, неверный ключ 401, TG 28.2 tok/s на коротком
+запросе; VRAM 18695/18901/16555 МиБ на GPU0/1/2, GPU3 свободна.
+Остановлены и отключены: `qwen-gpu0/1/2`, `qwen-balancer`, `qwen38-vision3-131k`
+(файлы юнитов оставлены на диске как откат, они же в репозитории).
+
+## Откатанная схема: три процесса + единая точка входа (24.09, снята вечером)
+На каждой GPU 0/1/2 был **отдельный процесс** `qwen-gpu0/1/2.service`
 (:18081/82/83) со своей копией Qwen3.8-27B и своим KV (q4_0, ctx 131072); mmproj на GPU3;
 единая точка входа — `qwen-balancer.service` (nginx `least_conn`) на **:8081**, куда уже
 смотрит Open WebUI. Клиентский контракт (URL, ключ, `model=Qwen3.8-27B`) не менялся.
