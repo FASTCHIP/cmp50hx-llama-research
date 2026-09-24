@@ -1,0 +1,14 @@
+[Unit]
+Description=nginx balancer for the 3 Qwen3.8 instances (single entry point :8081)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/nginx -c /etc/nginx/qwen-balancer.conf -g 'daemon off;'
+ExecReload=/usr/sbin/nginx -c /etc/nginx/qwen-balancer.conf -s reload
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

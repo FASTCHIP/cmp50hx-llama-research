@@ -1,0 +1,26 @@
+[Unit]
+Description=Qwen3.8-27B text+vision (mmproj on CUDA3), 131k pool, q4_0 KV
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=fastchip
+Group=fastchip
+WorkingDirectory=/home/fastchip/llama.cpp-vbbb-mmq-thresh-6a4317e/bin
+Environment=CUDA_VISIBLE_DEVICES=0,1,2,3
+Environment=GGML_CUDA_GRAPH_OPT=1
+Environment=NCCL_P2P_DISABLE=0
+Environment=NCCL_P2P_LEVEL=PHB
+Environment=GGML_CUDA_TURING_CUBLAS_MIN_M=256
+Environment=LD_LIBRARY_PATH=/home/fastchip/llama.cpp-vbbb-mmq-thresh-6a4317e/bin:/home/fastchip/llama.cpp-vbbb-mmq-thresh-6a4317e/lib:/usr/local/cuda-12.8/lib64
+ExecStart=/home/fastchip/llama.cpp-vbbb-mmq-thresh-6a4317e/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-device CUDA3 --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 1 --ctx-size 131072 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q4_0 --cache-type-v q4_0 --cache-ram 16384 --gpu-layers 99 --split-mode layer --tensor-split 1,1,1,0 --reasoning-effort low --cache-disk /mnt/usbsata/models/kvcache-vision3 --cache-disk-max 402400 --spec-type none -t 6 -tb 6 -b 2048 -ub 512 --api-key-file /etc/llama-server.api-key
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+SendSIGKILL=yes
+KillMode=mixed
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
