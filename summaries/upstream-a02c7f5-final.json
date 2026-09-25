@@ -332,20 +332,43 @@
         "decode_delta_pct": -62.42575077287191
       }
     },
+    "base-long": {
+      "p64k": {
+        "n": 1,
+        "pp": 586.4607155201774,
+        "decode": 31.07360094956331,
+        "pp_delta_pct": 0.0,
+        "decode_delta_pct": 0.0
+      },
+      "p120k": {
+        "n": 1,
+        "pp": 444.8073718595636,
+        "decode": 24.21914547056276,
+        "pp_delta_pct": 0.0,
+        "decode_delta_pct": 0.0
+      },
+      "p192k": {
+        "n": 1,
+        "pp": 342.8246007729266,
+        "decode": 18.509339419165272,
+        "pp_delta_pct": 0.0,
+        "decode_delta_pct": 0.0
+      }
+    },
     "tensor-long": {
       "p64k": {
         "n": 1,
         "pp": 418.4276699799114,
         "decode": 42.18118886951278,
-        "pp_delta_pct": null,
-        "decode_delta_pct": null
+        "pp_delta_pct": -28.65205479129569,
+        "decode_delta_pct": 35.746059614972204
       },
       "p120k": {
         "n": 1,
         "pp": 351.75345151100765,
         "decode": 34.88837182943522,
-        "pp_delta_pct": null,
-        "decode_delta_pct": null
+        "pp_delta_pct": -20.92004904494598,
+        "decode_delta_pct": 44.05286046049976
       }
     },
     "ub1024-long": {
@@ -353,22 +376,22 @@
         "n": 1,
         "pp": 478.39433141168837,
         "decode": 30.32672735203487,
-        "pp_delta_pct": null,
-        "decode_delta_pct": null
+        "pp_delta_pct": -18.426875193615746,
+        "decode_delta_pct": -2.403563071884457
       },
       "p120k": {
         "n": 1,
         "pp": 356.89416854329824,
         "decode": 23.558463259996486,
-        "pp_delta_pct": null,
-        "decode_delta_pct": null
+        "pp_delta_pct": -19.764331456273997,
+        "decode_delta_pct": -2.7279336150373408
       },
       "p192k": {
         "n": 1,
         "pp": 258.0203811131837,
         "decode": 18.921058877522945,
-        "pp_delta_pct": null,
-        "decode_delta_pct": null
+        "pp_delta_pct": -24.736911956885454,
+        "decode_delta_pct": 2.2243876403896046
       }
     },
     "ub2048-long": {
@@ -376,22 +399,22 @@
         "n": 1,
         "pp": 465.5480888625787,
         "decode": 31.076910730394047,
-        "pp_delta_pct": null,
-        "decode_delta_pct": null
+        "pp_delta_pct": -20.61734459917778,
+        "decode_delta_pct": 0.010651423490019605
       },
       "p120k": {
         "n": 1,
         "pp": 347.0196483304303,
         "decode": 24.646431685054285,
-        "pp_delta_pct": null,
-        "decode_delta_pct": null
+        "pp_delta_pct": -21.984285719079146,
+        "decode_delta_pct": 1.7642497544385707
       },
       "p192k": {
         "n": 1,
         "pp": 263.59683489744276,
         "decode": 19.446997391122306,
-        "pp_delta_pct": null,
-        "decode_delta_pct": null
+        "pp_delta_pct": -23.110291880121277,
+        "decode_delta_pct": 5.065864052318081
       }
     }
   },
@@ -409,6 +432,13 @@
       "expected": null,
       "bad": 0,
       "incomplete": false
+    },
+    "base-long": {
+      "rows": 7,
+      "batches": 0,
+      "expected": 9,
+      "bad": 0,
+      "incomplete": true
     },
     "base2": {
       "rows": 27,

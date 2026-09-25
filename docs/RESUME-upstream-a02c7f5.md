@@ -1,58 +1,94 @@
 # RESUME — кампания upstream-a02c7f5-speed
 
-Обновлено: 2026-09-25 (МСК, ночь). План: /home/fastchip/.hermes/plans/2026-09-24_201120-cmp50hx-prefill-decode.md
+## СТАТУС: ОСТАНОВЛЕНО
 
-## Что измеряем
+Остановлено 2026-09-25 в 08:46 МСК по указанию владельца. Точка остановки: этап 3,
+плечо `base-long` (эталонный замер длинных контекстов), 7 строк из 9 — успели
+p64k (3 класса), p120k (3 класса) и p192k/проза. Плечи `ub2048-rep5`, `ub1024-rep5`,
+`mtp5-p4k`, `ub2048-p250k` не запускались. Этап 4 не запускался ни одним плечом.
 
-Официальная сборка a02c7f5 + патч порога MMQ/cuBLAS (GGML_CUDA_TURING_CUBLAS_MIN_M=256).
-Стенд 192.168.50.9, прод не затрагивается. Фиксировано: Qwen3.8-27B-UD-Q4_K_XL, mmproj,
-3 GPU (0,1,2), layer, tensor-split 1.2,1.2,0.6, parallel 4, общий KV 524288, per-slot 262144,
-KV q8_0, FA on, --cache-ram 16384 (кроме плеча cram4096), MTP n=3 (кроме плеч спекуляции).
+Остановка выполнена корректно: цепочка этапа 3 не успела перейти на следующее
+плечо, поэтому сервис стенда никто не останавливал, тестовый вариант не поднимался.
+Порядок снятия: сначала killed цепочка (чтобы не ушла на плечо, останавливающее
+сервис), затем сторож этапа 4 (чтобы фаза 4 не стартовала), затем `systemctl stop`
+транзиентных юнитов и `reset-failed`. Все юниты кампании сняты, процессов кампании нет.
 
-## Etap 1 (ЗАКРЫТ): screening, 27 строк на плечо, 3 репета
-
-Метрика: prompt_tps / decode_tps, медиана по 3 классам.
+## Состояние стенда после остановки (проверено)
 
 ```
-Плечо      pp ср.  dec ср.
-base       399.5   36.44
-base2      398.3   36.45   контроль дрейфа
-base3      398.2   36.41   контроль после всех плеч
-thr512     398.4   35.99   контроль границы M
-cram4096   398.1   36.40   нейтрально
-ub1024     436.5   35.43   +9.3% pp
-ub2048     449.2   36.55   +12.4% pp
-mtp1       400.7   33.14   хуже
-mtp5       419.0   32.85   хуже
-nospec     444.7   23.79   MTP n=3 = +53% decode к nospec
-thr0       367.2   36.50   патч выключен: -8.1%
+llama-qwen.service   active, enabled
+MainPID              287666 (единственный llama-server)
+порт 8081            слушает этот же PID
+health               200
+бинарь               /home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server
+Xid с начала кампании 0
+vision-гейт          отвечает «Красный»
+неверный ключ        401
 ```
 
-Лестница prefill на 32k: thr0 456.4 -> base 495.8 -> ub1024 541.0 -> ub2048 564.3.
-На 4k: 520.0 -> 575.4 -> 639.7 -> 663.5.
+Конфигурация НЕ менялась относительно исходной: parallel 4, ctx 524288, cache-ram 16384,
+split-mode layer, tensor-split 1.2,1.2,0.6, spec-type draft-mtp, spec-draft-n-max 3,
+-ub 512, KV q8_0, FA on. Изменения настроек по итогам кампании не применялись.
 
-Итог: ubatch — рабочий рычаг prefill на этой сборке (прежний вывод о null относился к чистому
-MMQ и к threshold-патчу не переносится). MTP n=3 — оптимум. Аномалия: у mtp5 на p4k/проза
-prefill 739 (+28%), остальные классы не изменились — требует отдельной проверки.
+## Подтверждённые результаты (этапы 1 и 2, 3 репета × 3 класса, медианы)
 
-## Etap 2 (В РАБОТЕ): длинные контексты, tensor, concurrency, vision
+```
+Плечо      pp ср.  dec ср.   вывод
+base       399.5   36.44     эталон
+base2/3    398.2   36.43     дрейф в пределах 0.4%
+thr512     398.4   35.99     граница M подтверждена, нуль
+cram4096   398.1   36.40     нуль по скорости
+ub1024     436.5   35.43     +9.1% prefill на 32k, decode -4.6%
+ub2048     449.2   36.55     +13.8% на 32k, +15.5% на 4k, decode ровно
+thr0       367.2   36.50     патч выключен: -8.0% на 32k
+mtp1       400.7   33.14     хуже n=3
+mtp5       419.0   32.85     хуже n=3
+nospec     444.7   23.79     без спекуляции -37% decode
+tb12       564.8*  33.50*    *=на 32k, ровно как ub2048, выгоды нет
+tensor     464.6   44.91     decode +33.8%, prefill 32k -6.3%
+```
 
-Плечи: ub2048-long, ub1024-long, base-conc, ub2048-conc, tensor-mtp3, tensor-long,
-ub2048-vision, ub1024-conc, ub2048-b4096, ub2048-tb12.
-Проверено по исходникам: upstream не запрещает tensor split при квантованном KV,
-требует только flash_attn (включён). Архитектура qwen проходит llm_arch_supports_sm_tensor.
+Длинные контексты (эталон не успел посчитаться, поэтому дельты отсутствуют):
 
-## Инструменты
+```
+ub2048-long  p64k 465.5/31.08   p120k 347.0/24.65  p192k 263.6/19.45
+ub1024-long  p64k 478.4/30.33   p120k 356.9/23.56  p192k 258.0/18.92
+tensor-long  p64k 418.4/42.18   p120k 351.8/34.89
+```
 
-- Рабочий каталог: /home/fastchip/bench/upstream-a02c7f5-speed (manifest.json с отпечатками)
-- Runner: harness/run_variant.sh (копия проверенного, ROOT переtarгетен), цепочки chain_screen.sh и chain_phase2.sh
-- Сводка: harness/aggregate_screen.py STAMP [--write]
-- Запуск: sudo -n systemctl stop bench-chain / bench-phase2 (units: Type=oneshot, durable)
-- Плечи идут через systemd-run llama-research.service на :8081; сервис llama-qwen.service
-  восстанавливается trap-ом после каждого плеча, Xid считается от cursor
+4 клиента: base 67.09 агрегат / 20.60 на поток, ub1024 64.72, ub2048 66.52 — влияния нет.
 
-## Откат к эталону
+## Не измерено (остановлено на этом)
 
-sudo -n cp /home/fastchip/bench/upstream-a02c7f5-speed/state/llama-qwen.service.<arm>.snapshot /etc/systemd/system/llama-qwen.service
+1. Эталон длинных контекстов 64k/120k/192k — без него дельты длинных плеч не считаются.
+2. 5-репетное подтверждение ub2048 против ub1024 на 32k.
+3. Комбинация tensor + ubatch — самое перспективное из непроверенного: tensor даёт
+   +34% decode, ubatch +13.8% prefill, вместе не мерили.
+4. Аномалия mtp5 на p4k/проза (+9.9% prefill по агрегату, один класс +28%) не объяснена.
+5. Повтор плеч, поймавших деградировавшее состояние сервера: ub2048-vision и p32k
+   у `-b 4096` с `-ub 2048`. В выводы не идут.
+
+## Как продолжить
+
+```
+R=/home/fastchip/bench/upstream-a02c7f5-speed
+sudo -n systemd-run --unit=bench-phase4 --collect --property=Type=oneshot --no-block \
+  /bin/bash -lc "$R/harness/chain_phase4.sh 20260924T2050Z layer-ub2048-clean ub2048-vision2 base-vision tensor-ub2048 tensor-ub1024 b4096-p32k"
+```
+
+Отдельное плечо: `$R/harness/run_variant.sh <метка> -- <команда llama-server>` с
+`BENCH_CMD="$R/harness/run_arm.sh <stamp> <метка> 'short:3 p4k:3 p32k:3'"`.
+Сводка: `python3 $R/harness/aggregate_all.py 20260924T2050Z`.
+
+Сборка и патч: CT200 10.1.150.22, `/root/llama.cpp-upstream-20260924`,
+`/root/build-upstream-mmq-a02c7f5`, патч `/root/mmq-assets/`.
+
+## Откат
+
+К эталону текущей кампании (штатный сервис уже в нём — откат не нужен).
+К форковой сборке, если понадобится вернуться:
+
+```
+sudo -n cp /etc/systemd/system/llama-qwen.service.bak-20260924-upstream /etc/systemd/system/llama-qwen.service
 sudo -n systemctl daemon-reload && sudo -n systemctl restart llama-qwen.service
-(первичный откат к форковой сборке: .../llama-qwen.service.bak-20260924-upstream)
+```
