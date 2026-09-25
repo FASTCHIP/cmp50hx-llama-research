@@ -1,0 +1,72 @@
+2026-09-25T09:42:49+03:00 campaign_start stamp=20260925T064249Z out=/home/fastchip/bench/qwen38-2gpu-balance-20260925T064249Z
+2026-09-25T09:42:49+03:00 phase=split100
+2026-09-25T09:42:49+03:00 arm=split100 split=1.00,1.00 begin
+2026-09-25T09:50:56+03:00 arm=split100 PASS rows=3
+2026-09-25T09:50:56+03:00 phase=split110
+2026-09-25T09:50:56+03:00 arm=split110 split=1.10,0.90 begin
+2026-09-25T09:58:17+03:00 arm=split110 PASS rows=3
+2026-09-25T09:58:17+03:00 phase=split115
+2026-09-25T09:58:17+03:00 arm=split115 split=1.15,0.85 begin
+2026-09-25T10:05:42+03:00 arm=split115 PASS rows=3
+2026-09-25T10:05:42+03:00 phase=split120
+2026-09-25T10:05:42+03:00 arm=split120 split=1.20,0.80 begin
+2026-09-25T10:13:08+03:00 arm=split120 PASS rows=3
+2026-09-25T10:13:08+03:00 phase=split-screen-done
+2026-09-25T10:13:08+03:00 campaign_complete rows=12
+2026-09-25T10:13:08+03:00 phase=split100-long
+2026-09-25T10:13:08+03:00 arm=split100-long split=1.00,1.00 begin
+2026-09-25T10:22:26+03:00 arm=split100-long PASS
+2026-09-25T10:22:26+03:00 phase=splitbest-long
+2026-09-25T10:22:26+03:00 arm=splitbest-long split=1.10,0.90 begin
+2026-09-25T10:31:54+03:00 arm=splitbest-long PASS
+2026-09-25T10:31:54+03:00 phase=split-long-done
+2026-09-25T10:31:54+03:00 phase2_start out=/home/fastchip/bench/qwen38-2gpu-balance-20260925T064249Z split=1.10,0.90
+2026-09-25T10:31:54+03:00 phase=ub512
+2026-09-25T10:31:54+03:00 arm=ub512 split=1.10,0.90 ubatch=512 begin
+2026-09-25T10:47:48+03:00 arm=ub512 PASS
+2026-09-25T10:47:48+03:00 phase=ub256
+2026-09-25T10:47:48+03:00 arm=ub256 split=1.10,0.90 ubatch=256 begin
+2026-09-25T11:05:09+03:00 arm=ub256 PASS
+2026-09-25T11:05:09+03:00 phase=ub320
+2026-09-25T11:05:09+03:00 arm=ub320 split=1.10,0.90 ubatch=320 begin
+2026-09-25T11:22:12+03:00 arm=ub320 PASS
+2026-09-25T11:22:12+03:00 phase=ub384
+2026-09-25T11:22:12+03:00 arm=ub384 split=1.10,0.90 ubatch=384 begin
+2026-09-25T11:38:26+03:00 arm=ub384 PASS
+2026-09-25T11:38:26+03:00 phase=ubatch-screen-done
+2026-09-25T11:38:26+03:00 phase2_complete rows=72
+2026-09-25T11:38:43+03:00 phase=ub512-long
+2026-09-25T11:38:43+03:00 arm=ub512-long split=1.10,0.90 ubatch=512 begin
+2026-09-25T11:59:36+03:00 arm=ub512-long PASS
+2026-09-25T11:59:36+03:00 phase=ubalt-long
+2026-09-25T11:59:36+03:00 arm=ubalt-long split=1.10,0.90 ubatch=384 begin
+2026-09-25T12:20:38+03:00 arm=ubalt-long PASS
+2026-09-25T12:20:38+03:00 phase=ubatch-long-done
+2026-09-25T12:20:39+03:00 phase3_start out=/home/fastchip/bench/qwen38-2gpu-balance-20260925T064249Z split=1.10,0.90 ubatch=384
+2026-09-25T12:20:39+03:00 phase=mode-layer
+2026-09-25T12:20:39+03:00 arm=mode-layer mode=layer split=1.10,0.90 ubatch=384 begin
+2026-09-25T12:46:38+03:00 arm=mode-layer PASS
+2026-09-25T12:46:38+03:00 phase=mode-tensor
+2026-09-25T12:46:38+03:00 arm=mode-tensor mode=tensor split=1.00,1.00 ubatch=384 begin
+2026-09-25T13:15:38+03:00 arm=mode-tensor PASS
+2026-09-25T13:15:38+03:00 phase=mode-comparison-done
+2026-09-25T13:15:38+03:00 phase3_complete rows=12 conc=6
+2026-09-25T13:15:52+03:00 phase=p250-ref
+2026-09-25T13:15:52+03:00 arm=p250-ref mode=layer split=1.00,1.00 ubatch=512 begin
+2026-09-25T13:38:28+03:00 arm=p250-ref PASS
+2026-09-25T13:38:28+03:00 phase=p250-win
+2026-09-25T13:38:28+03:00 arm=p250-win mode=layer split=1.10,0.90 ubatch=384 begin
+2026-09-25T13:59:11+03:00 arm=p250-win PASS
+2026-09-25T13:59:11+03:00 phase=final-gate-done
+2026-09-25T14:16:42+03:00 phase=p250-split512
+2026-09-25T14:16:42+03:00 arm=p250-split512 split=1.10,0.90 ubatch=512 begin
+2026-09-25T14:40:19+03:00 arm=p250-split512 recoverable_FAIL
+2026-09-25T14:40:19+03:00 phase=disambig-done
+2026-09-25T14:40:35+03:00 phase6 final_ubatch=512 split=1.10,0.90
+2026-09-25T14:43:13+03:00 phase6 PROMOTE health_PASS
+2026-09-25T14:43:39+03:00 phase6_complete
+2026-09-25T14:46:30+03:00 phase7 ramcap=4096 health_PASS
+2026-09-25T14:46:31+03:00 phase=ramcap-live
+2026-09-25T15:03:58+03:00 ramcap p250k rc=0
+2026-09-25T15:04:34+03:00 ramcap conc2 rc=0
+2026-09-25T15:04:35+03:00 phase=ramcap-tested
