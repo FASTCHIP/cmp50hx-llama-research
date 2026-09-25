@@ -10,7 +10,7 @@ PROMPTS = {
 }
 FILL = ("A production inference system must preserve request ordering, memory safety, reproducible telemetry, and bounded rollback. "
         "Engineers compare prompt processing, token generation, synchronization, memory bandwidth, and tail latency under controlled load. ")
-TARGETS = {"short": None, "p4k": 4096, "p32k": 32768, "p64k": 63000, "p192k": 196608, "p250k": 256000}
+TARGETS = {"short": None, "p4k": 4096, "p32k": 32768, "p64k": 63000, "p120k": 122880, "p192k": 196608, "p250k": 256000}
 
 def http_json(url, payload, key, timeout=3600):
     data=json.dumps(payload, ensure_ascii=False).encode()

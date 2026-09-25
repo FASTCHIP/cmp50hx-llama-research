@@ -1,0 +1,107 @@
++ trap restore EXIT INT TERM
++ log 'variant=tensor-long preguard_begin devices=0,1,2'
+++ msk
+++ TZ=Europe/Moscow
+++ date --iso-8601=seconds
++ printf '%s %s\n' 2026-09-25T06:15:02+03:00 'variant=tensor-long preguard_begin devices=0,1,2'
+++ df -Pk /
+++ awk 'NR==2{print $4}'
++ free_k=32167624
++ ((  free_k > 15*1024*1024  ))
+++ nvidia-smi -L
+++ grep -c 'CMP 50HX'
++ [[ 4 -eq 4 ]]
++ python3 /home/fastchip/bench/upstream-a02c7f5-speed/harness/rollback_policy.py snapshot --services llama-qwen.service,bonsai-2.service --out /home/fastchip/bench/upstream-a02c7f5-speed/state/variant-tensor-long-initial.json
++ [[ -f /etc/systemd/system/llama-qwen.service ]]
++ sudo -n cp /etc/systemd/system/llama-qwen.service /home/fastchip/bench/upstream-a02c7f5-speed/state/llama-qwen.service.tensor-long.snapshot
++ sha256sum /home/fastchip/bench/upstream-a02c7f5-speed/state/llama-qwen.service.tensor-long.snapshot
++ awk '{print "unit_sha16="$1}'
++ cut -c1-24
+++ python3 -c 'import json,sys;print(json.load(open('\''/home/fastchip/bench/upstream-a02c7f5-speed/state/variant-tensor-long-initial.json'\''))['\''services'\''])'
++ log 'variant=tensor-long snapshot services={'\''llama-qwen.service'\'': True, '\''bonsai-2.service'\'': False}'
+++ msk
+++ TZ=Europe/Moscow
+++ date --iso-8601=seconds
++ printf '%s %s\n' 2026-09-25T06:15:02+03:00 'variant=tensor-long snapshot services={'\''llama-qwen.service'\'': True, '\''bonsai-2.service'\'': False}'
+++ sudo -n journalctl -k -b --no-pager
+++ grep -cE 'NV_ERR_RESET_REQUIRED|RmInitAdapter|Booter failed|AER:.*Uncorrected'
+++ true
++ fatal=0
++ [[ 0 -eq 0 ]]
++ for b in 01:00.0 02:00.0 04:00.0
+++ cat /sys/bus/pci/devices/0000:01:00.0/current_link_speed
++ [[ 5.0 GT/s PCIe == \5\.\0\ \G\T\/\s\ \P\C\I\e ]]
+++ cat /sys/bus/pci/devices/0000:01:00.0/current_link_width
++ [[ 8 == 8 ]]
++ for b in 01:00.0 02:00.0 04:00.0
+++ cat /sys/bus/pci/devices/0000:02:00.0/current_link_speed
++ [[ 5.0 GT/s PCIe == \5\.\0\ \G\T\/\s\ \P\C\I\e ]]
+++ cat /sys/bus/pci/devices/0000:02:00.0/current_link_width
++ [[ 8 == 8 ]]
++ for b in 01:00.0 02:00.0 04:00.0
+++ cat /sys/bus/pci/devices/0000:04:00.0/current_link_speed
++ [[ 5.0 GT/s PCIe == \5\.\0\ \G\T\/\s\ \P\C\I\e ]]
+++ cat /sys/bus/pci/devices/0000:04:00.0/current_link_width
++ [[ 8 == 8 ]]
++ sudo -n systemctl stop bonsai-2.service
++ sudo -n systemctl stop llama-qwen.service
++ ss -tln
++ grep -q ':8081 '
++ sudo -n systemctl reset-failed llama-research.service
++ true
++ log 'variant=tensor-long launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 3 --split-mode tensor --tensor-split 1,1,1'
+++ msk
+++ TZ=Europe/Moscow
+++ date --iso-8601=seconds
++ printf '%s %s\n' 2026-09-25T06:15:07+03:00 'variant=tensor-long launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 3 --split-mode tensor --tensor-split 1,1,1'
++ sudo -n systemd-run --unit=llama-research.service --service-type=simple --uid=fastchip --gid=fastchip --property=Restart=no --property=TimeoutStopSec=20 --property=KillMode=mixed --setenv=CUDA_VISIBLE_DEVICES=0,1,2 --setenv=GGML_CUDA_GRAPH_OPT=1 --setenv=NCCL_P2P_DISABLE=0 --setenv=NCCL_P2P_LEVEL=PHB --setenv=GGML_CUDA_TURING_CUBLAS_MIN_M=256 --setenv=LD_LIBRARY_PATH=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin:/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/lib:/usr/local/cuda-12.8/lib64 /home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 3 --split-mode tensor --tensor-split 1,1,1
++ /home/fastchip/bench/upstream-a02c7f5-speed/harness/wait_health.sh http://127.0.0.1:8081/health 600 llama-research.service
++ log 'variant=tensor-long health_PASS'
+++ msk
+++ TZ=Europe/Moscow
+++ date --iso-8601=seconds
++ printf '%s %s\n' 2026-09-25T06:17:40+03:00 'variant=tensor-long health_PASS'
++ [[ -n /home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh 20260924T2050Z tensor-long 'p64k:1 p120k:1' ]]
++ bash -lc '/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh 20260924T2050Z tensor-long '\''p64k:1 p120k:1'\'''
++ log 'variant=tensor-long bench_PASS'
+++ msk
+++ TZ=Europe/Moscow
+++ date --iso-8601=seconds
++ printf '%s %s\n' 2026-09-25T06:44:52+03:00 'variant=tensor-long bench_PASS'
++ restore
++ local rc=0
++ trap - EXIT INT TERM
++ log 'variant=tensor-long restore_begin rc=0'
+++ msk
+++ TZ=Europe/Moscow
+++ date --iso-8601=seconds
++ printf '%s %s\n' 2026-09-25T06:44:52+03:00 'variant=tensor-long restore_begin rc=0'
++ sudo -n systemctl stop llama-research.service
++ [[ -f /home/fastchip/bench/upstream-a02c7f5-speed/state/llama-qwen.service.tensor-long.snapshot ]]
++ sudo -n cp /home/fastchip/bench/upstream-a02c7f5-speed/state/llama-qwen.service.tensor-long.snapshot /etc/systemd/system/llama-qwen.service
++ sudo -n systemctl daemon-reload
++ sudo -n systemctl restart llama-qwen.service
++ /home/fastchip/bench/upstream-a02c7f5-speed/harness/wait_health.sh http://127.0.0.1:8081/health 480 llama-qwen.service
++ read -r svc
+++ python3 /home/fastchip/bench/upstream-a02c7f5-speed/harness/rollback_policy.py restore-list --state /home/fastchip/bench/upstream-a02c7f5-speed/state/variant-tensor-long-initial.json
++ [[ -z llama-qwen.service ]]
++ sudo -n systemctl start llama-qwen.service
++ read -r svc
++ sleep 5
++ local health count xid
+++ curl -s -o /dev/null -w '%{http_code}' --max-time 10 http://127.0.0.1:8081/health
++ health=200
+++ pgrep -x llama-server
+++ wc -l
++ count=1
+++ xid_new
+++ python3 /home/fastchip/bench/upstream-a02c7f5-speed/harness/rollback_policy.py xid-new --state /home/fastchip/bench/upstream-a02c7f5-speed/state/variant-tensor-long-initial.json
++ xid=0
++ log 'variant=tensor-long restore_done health=200 llama_count=1 new_xid=0'
+++ msk
+++ TZ=Europe/Moscow
+++ date --iso-8601=seconds
++ printf '%s %s\n' 2026-09-25T06:47:32+03:00 'variant=tensor-long restore_done health=200 llama_count=1 new_xid=0'
++ [[ 0 =~ ^[0-9]+$ ]]
++ ((  xid > 0  ))
++ return 0

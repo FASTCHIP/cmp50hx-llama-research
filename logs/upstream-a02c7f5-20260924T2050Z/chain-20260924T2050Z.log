@@ -1,0 +1,54 @@
+2026-09-24T23:39:07+03:00 chain_begin stamp=20260924T2050Z arms='ub1024 ub2048 base2 mtp5 mtp1 nospec thr0 thr512 cram4096 base3' cases='short:3 p4k:3 p32k:3'
+2026-09-24T23:39:07+03:00 arm=ub1024 begin
+Running as unit: llama-research.service; invocation ID: 5a9b5cd07efd44aeb73dfd9aa95249a7
+{"status":"ok"}/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/ub1024-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/ub1024-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/ub1024-20260924T2050Z.jsonl": No such file or directory
+{"status":"ok"}2026-09-25T00:02:03+03:00 arm=ub1024 end rc=0 rows=27
+2026-09-25T00:02:03+03:00 arm=ub2048 begin
+Running as unit: llama-research.service; invocation ID: f8ccd758a40b46bfb6a358184d91d629
+{"status":"ok"}/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/ub2048-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/ub2048-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/ub2048-20260924T2050Z.jsonl": No such file or directory
+{"status":"ok"}2026-09-25T00:23:00+03:00 arm=ub2048 end rc=0 rows=27
+2026-09-25T00:23:00+03:00 arm=base2 begin
+2026-09-25T00:41:06+03:00 arm=base2 end rc=0 rows=27
+2026-09-25T00:41:06+03:00 arm=mtp5 begin
+Running as unit: llama-research.service; invocation ID: 8e218806c29c4ea2854f0e7d5a833665
+{"status":"ok"}/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/mtp5-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/mtp5-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/mtp5-20260924T2050Z.jsonl": No such file or directory
+{"status":"ok"}2026-09-25T01:05:11+03:00 arm=mtp5 end rc=0 rows=27
+2026-09-25T01:05:11+03:00 arm=mtp1 begin
+Running as unit: llama-research.service; invocation ID: 8e90f355642c4d8c965e55779d423a23
+{"status":"ok"}/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/mtp1-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/mtp1-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/mtp1-20260924T2050Z.jsonl": No such file or directory
+{"status":"ok"}2026-09-25T01:29:15+03:00 arm=mtp1 end rc=0 rows=27
+2026-09-25T01:29:15+03:00 arm=nospec begin
+Running as unit: llama-research.service; invocation ID: edb07c1549034fa3a2d72929743da1c1
+{"status":"ok"}/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/nospec-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/nospec-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/nospec-20260924T2050Z.jsonl": No such file or directory
+{"status":"ok"}2026-09-25T01:54:56+03:00 arm=nospec end rc=0 rows=27
+2026-09-25T01:54:56+03:00 arm=thr0 begin
+Running as unit: llama-research.service; invocation ID: ff0a82f3d48148ce95b1511b70fb7ae8
+{"status":"ok"}/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/thr0-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/thr0-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/thr0-20260924T2050Z.jsonl": No such file or directory
+{"status":"ok"}2026-09-25T02:18:42+03:00 arm=thr0 end rc=0 rows=27
+2026-09-25T02:18:42+03:00 arm=thr512 begin
+Running as unit: llama-research.service; invocation ID: 08f1f62a7e1b47e49b9664b954941b41
+{"status":"ok"}/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/thr512-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/thr512-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/thr512-20260924T2050Z.jsonl": No such file or directory
+{"status":"ok"}2026-09-25T02:40:43+03:00 arm=thr512 end rc=0 rows=27
+2026-09-25T02:40:43+03:00 arm=cram4096 begin
+Running as unit: llama-research.service; invocation ID: d1157b9b83fe43378b517cbddbde68e7
+{"status":"ok"}/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/cram4096-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/cram4096-20260924T2050Z.jsonl": No such file or directory
+/home/fastchip/bench/upstream-a02c7f5-speed/harness/run_arm.sh: line 21: "/home/fastchip/bench/upstream-a02c7f5-speed/raw/cram4096-20260924T2050Z.jsonl": No such file or directory
+{"status":"ok"}2026-09-25T03:02:29+03:00 arm=cram4096 end rc=0 rows=27
+2026-09-25T03:02:29+03:00 arm=base3 begin
+2026-09-25T03:20:34+03:00 arm=base3 end rc=0 rows=27
+2026-09-25T03:20:34+03:00 chain_complete arms='ub1024 ub2048 base2 mtp5 mtp1 nospec thr0 thr512 cram4096 base3'

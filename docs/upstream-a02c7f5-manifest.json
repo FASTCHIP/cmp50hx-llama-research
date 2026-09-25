@@ -1,0 +1,174 @@
+{
+  "campaign": "upstream-a02c7f5-speed",
+  "created_utc": "2026-09-24T20:18:08.023299+00:00",
+  "host": "ai100gb",
+  "root": "/home/fastchip/bench/upstream-a02c7f5-speed",
+  "harness_provenance": "copied from /home/fastchip/cmp50hx-llama-research/harness",
+  "harness_files": [
+    "agents_conc.py",
+    "bench_concurrency.py",
+    "bench_request.py",
+    "calibrate_prompt.py",
+    "elastic_test.py",
+    "mmq_pivot.py",
+    "mtp_report.py",
+    "pivot.py",
+    "rollback_policy.py",
+    "test_harness.py",
+    "vision_smoke.py",
+    "agents_variant.sh",
+    "campaign.sh",
+    "mmq_bench.sh",
+    "run_variant.sh",
+    "wait_health.sh"
+  ],
+  "unit_path": "/etc/systemd/system/llama-qwen.service",
+  "unit_sha256": "c1ea95ed3f552585bef539c6e28c041ed238ff6e825ab91236b2f94b215a14d3",
+  "unit_text": "[Unit]\nDescription=Qwen3.8 llama.cpp inference server (official upstream a02c7f5, MMQ/cuBLAS threshold)\nAfter=network-online.target docker.service\nWants=network-online.target\nRequires=docker.service\n\n[Service]\nType=simple\nUser=fastchip\nGroup=fastchip\nWorkingDirectory=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin\nEnvironment=CUDA_VISIBLE_DEVICES=0,1,2\nEnvironment=GGML_CUDA_GRAPH_OPT=1\nEnvironment=NCCL_P2P_DISABLE=0\nEnvironment=NCCL_P2P_LEVEL=PHB\nEnvironment=GGML_CUDA_TURING_CUBLAS_MIN_M=256\nEnvironment=LD_LIBRARY_PATH=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin:/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/lib:/usr/local/cuda-12.8/lib64\nExecStart=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --cache-ram 16384 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low --spec-type draft-mtp --spec-draft-n-max 3 -t 6 -tb 6 -b 2048 -ub 512 --api-key-file /etc/llama-server.api-key\nRestart=always\nRestartSec=5\nTimeoutStopSec=20\nSendSIGKILL=yes\nKillMode=mixed\nLimitNOFILE=65536\n\n[Install]\nWantedBy=multi-user.target\n",
+  "dropin_dir_sha256": {
+    "/etc/systemd/system/llama-qwen.service.d/gen2-order.conf": "89d29f63e8f8e04a1141402275b03be03f91d30e359edea03cce044547b6d2ea",
+    "/etc/systemd/system/llama-qwen.service.d/gen2-order.conf.bak-20260917-053009": "a5a07bc67ca5fe945a3dad2800067e055e6b429bb7e54e245f40a8bbc5e1a2e3"
+  },
+  "unit_execstart": "{ path=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server ; argv[]=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --cache-ram 16384 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low --spec-type draft-mtp --spec-draft-n-max 3 -t 6 -tb 6 -b 2048 -ub 512 --api-key-file /etc/llama-server.api-key ; ignore_errors=no ; start_time=[Thu 2026-09-24 22:37:47 MSK] ; stop_time=[n/a] ; pid=245404 ; code=(null) ; status=0/0 }",
+  "unit_environment": "CUDA_VISIBLE_DEVICES=0,1,2 GGML_CUDA_GRAPH_OPT=1 NCCL_P2P_DISABLE=0 NCCL_P2P_LEVEL=PHB GGML_CUDA_TURING_CUBLAS_MIN_M=256 LD_LIBRARY_PATH=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin:/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/lib:/usr/local/cuda-12.8/lib64",
+  "llama_server_version": "version: 0.5.0-dev (build 5, commit a02c7f5)",
+  "build": {
+    "source_commit": "a02c7f58c1c335f5375bf81f174b9a58cce939af",
+    "source": "ggml-org/llama.cpp official upstream",
+    "patch": "TAG_MMQ_M_THRESHOLD (mmq-turing-policy.h + patch_mmq.py), env GGML_CUDA_TURING_CUBLAS_MIN_M",
+    "package": "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5"
+  },
+  "cpu": "CPU(s):                                  12\nModel name:                              Intel(R) Xeon(R) CPU E5-2620 0 @ 2.00GHz\nThread(s) per core:                      2\nCore(s) per socket:                      6\nSocket(s):                               1\nCPU(s) scaling MHz:                      68%",
+  "gpu_static": "0, NVIDIA CMP 50HX, 20480 MiB, 2, 16\n1, NVIDIA CMP 50HX, 20480 MiB, 2, 16\n2, NVIDIA CMP 50HX, 20480 MiB, 2, 16\n3, NVIDIA CMP 50HX, 10240 MiB, 2, 16",
+  "pcie_now": {
+    "01:00.0": "5.0 GT/s PCIe\n8",
+    "02:00.0": "5.0 GT/s PCIe\n8",
+    "04:00.0": "5.0 GT/s PCIe\n8"
+  },
+  "kernel": "6.8.0-136-generic",
+  "driver": "610.43.03",
+  "artifacts": {
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml-base.so": {
+      "sha256": "63a5c66717594053316dc7c58a05df34d707da221f53d0ee183b23595b9d138c",
+      "size": 948848
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml-base.so.0": {
+      "sha256": "63a5c66717594053316dc7c58a05df34d707da221f53d0ee183b23595b9d138c",
+      "size": 948848
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml-base.so.0.25.1": {
+      "sha256": "63a5c66717594053316dc7c58a05df34d707da221f53d0ee183b23595b9d138c",
+      "size": 948848
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml-cpu.so": {
+      "sha256": "a9d4b1b0d174d1b5a1ec848f7b094d842e818b53ab14681724f4fd435ab111dd",
+      "size": 1157800
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml-cpu.so.0": {
+      "sha256": "a9d4b1b0d174d1b5a1ec848f7b094d842e818b53ab14681724f4fd435ab111dd",
+      "size": 1157800
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml-cpu.so.0.25.1": {
+      "sha256": "a9d4b1b0d174d1b5a1ec848f7b094d842e818b53ab14681724f4fd435ab111dd",
+      "size": 1157800
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml-cuda.so": {
+      "sha256": "1510f15002ef3dc91b706e91685c8ef2bca4bc4411123177a01d7fb92fc0ccbb",
+      "size": 196784352
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml-cuda.so.0": {
+      "sha256": "1510f15002ef3dc91b706e91685c8ef2bca4bc4411123177a01d7fb92fc0ccbb",
+      "size": 196784352
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml-cuda.so.0.25.1": {
+      "sha256": "1510f15002ef3dc91b706e91685c8ef2bca4bc4411123177a01d7fb92fc0ccbb",
+      "size": 196784352
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml.so": {
+      "sha256": "876da3c056b88f00fbad0f56592cbc70aee3a7a8915abdac50c79c473ca5b7fc",
+      "size": 60360
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml.so.0": {
+      "sha256": "876da3c056b88f00fbad0f56592cbc70aee3a7a8915abdac50c79c473ca5b7fc",
+      "size": 60360
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libggml.so.0.25.1": {
+      "sha256": "876da3c056b88f00fbad0f56592cbc70aee3a7a8915abdac50c79c473ca5b7fc",
+      "size": 60360
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libllama-bench-impl.so": {
+      "sha256": "3a173f629f4f0f6c29bde0f911cedfc1d9547be81b726aa3f24eed78d5f679f3",
+      "size": 485072
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libllama-common.so": {
+      "sha256": "f4d6987275fd0fb2b1f0402e5449eed68a60ab517a80d17e304454c4bba39d08",
+      "size": 6071208
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libllama-common.so.0": {
+      "sha256": "f4d6987275fd0fb2b1f0402e5449eed68a60ab517a80d17e304454c4bba39d08",
+      "size": 6071208
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libllama-common.so.0.5.0": {
+      "sha256": "f4d6987275fd0fb2b1f0402e5449eed68a60ab517a80d17e304454c4bba39d08",
+      "size": 6071208
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libllama-server-impl.so": {
+      "sha256": "0abedf8c3d321a3114a78856a231d4c020f5a3130c9e429a8f3aa8b30e4981f8",
+      "size": 6909880
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libllama.so": {
+      "sha256": "a978df9f8f451e0d6e93f0d1f9c43a1660253669aab1ed535e400892161713f8",
+      "size": 4725088
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libllama.so.0": {
+      "sha256": "a978df9f8f451e0d6e93f0d1f9c43a1660253669aab1ed535e400892161713f8",
+      "size": 4725088
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libllama.so.0.5.0": {
+      "sha256": "a978df9f8f451e0d6e93f0d1f9c43a1660253669aab1ed535e400892161713f8",
+      "size": 4725088
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libmtmd.so": {
+      "sha256": "39f965c976e68b8cbadd3558911e980ff5ac10f89fec2e1ebc8e654db25feedc",
+      "size": 1978992
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libmtmd.so.0": {
+      "sha256": "39f965c976e68b8cbadd3558911e980ff5ac10f89fec2e1ebc8e654db25feedc",
+      "size": 1978992
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/libmtmd.so.0.5.0": {
+      "sha256": "39f965c976e68b8cbadd3558911e980ff5ac10f89fec2e1ebc8e654db25feedc",
+      "size": 1978992
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-bench": {
+      "sha256": "5cbf1dd092983986ae0bee7668c21a658642d4ab6b019f8ecca8be119f221bfa",
+      "size": 17888
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server": {
+      "sha256": "84e18edfe422a6c0cebe5c4bfdf00ce70b9abd3d63fdccab3404eaafd72e4df4",
+      "size": 17888
+    },
+    "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/lib/libnccl.so.2": {
+      "sha256": "6f9b94fb6f1bc149e28f9e8bad22d180a89b6956dc7c20e669bc901306db5c87",
+      "size": 374497712
+    }
+  },
+  "live_pid": "245404",
+  "live_cmdline": "/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --cache-ram 16384 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low --spec-type draft-mtp --spec-draft-n-max 3 -t 6 -tb 6 -b 2048 -ub 512 --api-key-file /etc/llama-server.api-key",
+  "model": {
+    "path": "/mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf",
+    "size": 17559178144,
+    "mtime": "2026-09-07T15:16:28.641337+00:00",
+    "sha256": "3f227079003add2511437e5b1e94812e363385225bf6a9b47b0054a72bc8b01e",
+    "bytes_hashed": 17559178144,
+    "hash_seconds": 135.0
+  },
+  "mmproj": {
+    "path": "/mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf",
+    "size": 629247136,
+    "sha256": "92a3a8e60fa70a5761b14e86ba710741ae3b540c924958b5d8d8c5ff8c9f42b6",
+    "bytes_hashed": 629247136,
+    "hash_seconds": 4.9
+  },
+  "model_hashed_utc": "2026-09-24T20:20:42.093448+00:00"
+}

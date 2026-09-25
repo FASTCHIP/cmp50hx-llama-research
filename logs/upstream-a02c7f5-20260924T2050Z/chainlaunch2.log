@@ -1,0 +1,4 @@
+2026-09-24T23:59:30Z waiter2 start phase=cram4096
+2026-09-25T00:20:45Z phase1 done; launching phase2
+Running as unit: bench-phase2.service
+2026-09-25T00:20:45Z phase2_launch_rc=0

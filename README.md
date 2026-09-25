@@ -13,6 +13,10 @@
 - **Найденное ускорение prefill: [`summaries/MMQ-THRESHOLD-AB.md`](summaries/MMQ-THRESHOLD-AB.md)** — порог MMQ->cuBLAS на Turing: +8% prefill на 32K без потери decode, качества и коротких запросов.
 - **Актуальный краткий отчёт: [`summaries/FINAL-RESULTS-2026-09-23.md`](summaries/FINAL-RESULTS-2026-09-23.md)** —
   сверенные числа, закрытые направления и ссылка на [план оптимизации](docs/superpowers/plans/2026-09-23-qwen38-sm75-throughput.md). Остальная часть README — исторический обзор; более ранние предложения по FA tile64 не применять.
+- **Новая кампания (2026-09-24/25): официальный upstream `a02c7f5` + наш патч порога — [`summaries/UPSTREAM-A02C7F5-RESULTS-2026-09-25.md`](summaries/UPSTREAM-A02C7F5-RESULTS-2026-09-25.md)** —
+  ubatch 2048: **+13.8% prefill на 32K** без потери decode; tensor-split: **+34% decode** ценой prefill; MTP n=3 подтверждён оптимальным (n=1 и n=5 хуже); thr0 подтверждает вклад патча (+8-10%).
+  Сырые строки: [`raw/upstream-a02c7f5-20260924T2050Z/`](raw/upstream-a02c7f5-20260924T2050Z), логи плеч: [`logs/upstream-a02c7f5-20260924T2050Z/`](logs/upstream-a02c7f5-20260924T2050Z), манифест отпечатков: [`docs/upstream-a02c7f5-manifest.json`](docs/upstream-a02c7f5-manifest.json).
+  Итоговая конфигурация стенда пока не менялась: активны `-ub 512`, MTP n=3, layer.
 
 ## Железо
 

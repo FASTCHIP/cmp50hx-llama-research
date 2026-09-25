@@ -1,0 +1,27 @@
+[Unit]
+Description=Qwen3.8 llama.cpp inference server (official upstream a02c7f5, MMQ/cuBLAS threshold)
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=simple
+User=fastchip
+Group=fastchip
+WorkingDirectory=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin
+Environment=CUDA_VISIBLE_DEVICES=0,1,2
+Environment=GGML_CUDA_GRAPH_OPT=1
+Environment=NCCL_P2P_DISABLE=0
+Environment=NCCL_P2P_LEVEL=PHB
+Environment=GGML_CUDA_TURING_CUBLAS_MIN_M=256
+Environment=LD_LIBRARY_PATH=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin:/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/lib:/usr/local/cuda-12.8/lib64
+ExecStart=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --cache-ram 16384 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low --spec-type draft-mtp --spec-draft-n-max 3 -t 6 -tb 6 -b 2048 -ub 512 --api-key-file /etc/llama-server.api-key
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+SendSIGKILL=yes
+KillMode=mixed
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

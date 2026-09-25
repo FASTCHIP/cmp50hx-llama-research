@@ -1,0 +1,4 @@
+2026-09-24T20:25:07Z waiter start rows=14
+2026-09-24T20:39:07Z baseline_complete rows=27; starting chain
+Running as unit: bench-chain.service
+2026-09-24T20:39:07Z chain_launch_rc=0

@@ -1,0 +1,125 @@
+2026-09-24T23:39:07+03:00 variant=ub1024 preguard_begin devices=0,1,2
+2026-09-24T23:39:08+03:00 variant=ub1024 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-24T23:39:12+03:00 variant=ub1024 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 1024 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-24T23:42:01+03:00 variant=ub1024 health_PASS
+2026-09-24T23:59:20+03:00 variant=ub1024 bench_PASS
+2026-09-24T23:59:20+03:00 variant=ub1024 restore_begin rc=0
+2026-09-25T00:02:03+03:00 variant=ub1024 restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T00:02:03+03:00 variant=ub2048 preguard_begin devices=0,1,2
+2026-09-25T00:02:04+03:00 variant=ub2048 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T00:02:08+03:00 variant=ub2048 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 2048 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T00:03:54+03:00 variant=ub2048 health_PASS
+2026-09-25T00:20:36+03:00 variant=ub2048 bench_PASS
+2026-09-25T00:20:36+03:00 variant=ub2048 restore_begin rc=0
+2026-09-25T00:23:00+03:00 variant=ub2048 restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T00:41:06+03:00 variant=mtp5 preguard_begin devices=0,1,2
+2026-09-25T00:41:06+03:00 variant=mtp5 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T00:41:10+03:00 variant=mtp5 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 5
+2026-09-25T00:43:42+03:00 variant=mtp5 health_PASS
+2026-09-25T01:02:35+03:00 variant=mtp5 bench_PASS
+2026-09-25T01:02:35+03:00 variant=mtp5 restore_begin rc=0
+2026-09-25T01:05:11+03:00 variant=mtp5 restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T01:05:11+03:00 variant=mtp1 preguard_begin devices=0,1,2
+2026-09-25T01:05:12+03:00 variant=mtp1 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T01:05:17+03:00 variant=mtp1 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 1
+2026-09-25T01:07:49+03:00 variant=mtp1 health_PASS
+2026-09-25T01:26:28+03:00 variant=mtp1 bench_PASS
+2026-09-25T01:26:28+03:00 variant=mtp1 restore_begin rc=0
+2026-09-25T01:29:15+03:00 variant=mtp1 restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T01:29:15+03:00 variant=nospec preguard_begin devices=0,1,2
+2026-09-25T01:29:16+03:00 variant=nospec snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T01:29:20+03:00 variant=nospec launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type none
+2026-09-25T01:31:42+03:00 variant=nospec health_PASS
+2026-09-25T01:52:12+03:00 variant=nospec bench_PASS
+2026-09-25T01:52:12+03:00 variant=nospec restore_begin rc=0
+2026-09-25T01:54:56+03:00 variant=nospec restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T01:54:56+03:00 variant=thr0 preguard_begin devices=0,1,2
+2026-09-25T01:54:57+03:00 variant=thr0 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T01:55:01+03:00 variant=thr0 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T01:57:35+03:00 variant=thr0 health_PASS
+2026-09-25T02:16:37+03:00 variant=thr0 bench_PASS
+2026-09-25T02:16:37+03:00 variant=thr0 restore_begin rc=0
+2026-09-25T02:18:42+03:00 variant=thr0 restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T02:18:42+03:00 variant=thr512 preguard_begin devices=0,1,2
+2026-09-25T02:18:43+03:00 variant=thr512 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T02:18:47+03:00 variant=thr512 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T02:20:32+03:00 variant=thr512 health_PASS
+2026-09-25T02:38:44+03:00 variant=thr512 bench_PASS
+2026-09-25T02:38:44+03:00 variant=thr512 restore_begin rc=0
+2026-09-25T02:40:43+03:00 variant=thr512 restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T02:40:43+03:00 variant=cram4096 preguard_begin devices=0,1,2
+2026-09-25T02:40:44+03:00 variant=cram4096 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T02:40:49+03:00 variant=cram4096 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 4096 -ub 512 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T02:42:30+03:00 variant=cram4096 health_PASS
+2026-09-25T03:00:36+03:00 variant=cram4096 bench_PASS
+2026-09-25T03:00:36+03:00 variant=cram4096 restore_begin rc=0
+2026-09-25T03:02:29+03:00 variant=cram4096 restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T03:20:45+03:00 variant=ub2048-long preguard_begin devices=0,1,2
+2026-09-25T03:20:46+03:00 variant=ub2048-long snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T03:20:50+03:00 variant=ub2048-long launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 2048 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T03:22:34+03:00 variant=ub2048-long health_PASS
+2026-09-25T04:28:50+03:00 variant=ub2048-long bench_PASS
+2026-09-25T04:28:50+03:00 variant=ub2048-long restore_begin rc=0
+2026-09-25T04:31:35+03:00 variant=ub2048-long restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T04:31:35+03:00 variant=ub1024-long preguard_begin devices=0,1,2
+2026-09-25T04:31:36+03:00 variant=ub1024-long snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T04:31:40+03:00 variant=ub1024-long launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 1024 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T04:33:33+03:00 variant=ub1024-long health_PASS
+2026-09-25T05:40:16+03:00 variant=ub1024-long bench_PASS
+2026-09-25T05:40:16+03:00 variant=ub1024-long restore_begin rc=0
+2026-09-25T05:43:04+03:00 variant=ub1024-long restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T05:43:04+03:00 variant=base-conc preguard_begin devices=0,1,2
+2026-09-25T05:43:05+03:00 variant=base-conc snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T05:43:09+03:00 variant=base-conc launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T05:44:59+03:00 variant=base-conc health_PASS
+2026-09-25T05:45:45+03:00 variant=base-conc bench_PASS
+2026-09-25T05:45:45+03:00 variant=base-conc restore_begin rc=0
+2026-09-25T05:47:50+03:00 variant=base-conc restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T05:47:50+03:00 variant=ub2048-conc preguard_begin devices=0,1,2
+2026-09-25T05:47:51+03:00 variant=ub2048-conc snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T05:47:55+03:00 variant=ub2048-conc launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 2048 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T05:49:53+03:00 variant=ub2048-conc health_PASS
+2026-09-25T05:50:39+03:00 variant=ub2048-conc bench_PASS
+2026-09-25T05:50:39+03:00 variant=ub2048-conc restore_begin rc=0
+2026-09-25T05:52:33+03:00 variant=ub2048-conc restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T05:52:33+03:00 variant=tensor-mtp3 preguard_begin devices=0,1,2
+2026-09-25T05:52:34+03:00 variant=tensor-mtp3 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T05:52:38+03:00 variant=tensor-mtp3 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 3 --split-mode tensor --tensor-split 1,1,1
+2026-09-25T05:54:54+03:00 variant=tensor-mtp3 health_PASS
+2026-09-25T06:12:15+03:00 variant=tensor-mtp3 bench_PASS
+2026-09-25T06:12:15+03:00 variant=tensor-mtp3 restore_begin rc=0
+2026-09-25T06:15:02+03:00 variant=tensor-mtp3 restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T06:15:02+03:00 variant=tensor-long preguard_begin devices=0,1,2
+2026-09-25T06:15:02+03:00 variant=tensor-long snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T06:15:07+03:00 variant=tensor-long launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 512 --spec-type draft-mtp --spec-draft-n-max 3 --split-mode tensor --tensor-split 1,1,1
+2026-09-25T06:17:40+03:00 variant=tensor-long health_PASS
+2026-09-25T06:44:52+03:00 variant=tensor-long bench_PASS
+2026-09-25T06:44:52+03:00 variant=tensor-long restore_begin rc=0
+2026-09-25T06:47:32+03:00 variant=tensor-long restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T06:47:32+03:00 variant=ub2048-vision preguard_begin devices=0,1,2
+2026-09-25T06:47:33+03:00 variant=ub2048-vision snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T06:47:37+03:00 variant=ub2048-vision launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 2048 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T06:50:09+03:00 variant=ub2048-vision health_PASS
+2026-09-25T06:56:24+03:00 variant=ub2048-vision bench_PASS
+2026-09-25T06:56:24+03:00 variant=ub2048-vision restore_begin rc=0
+2026-09-25T06:58:54+03:00 variant=ub2048-vision restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T06:58:54+03:00 variant=ub1024-conc preguard_begin devices=0,1,2
+2026-09-25T06:58:55+03:00 variant=ub1024-conc snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T06:58:59+03:00 variant=ub1024-conc launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 1024 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T07:00:58+03:00 variant=ub1024-conc health_PASS
+2026-09-25T07:01:46+03:00 variant=ub1024-conc bench_PASS
+2026-09-25T07:01:46+03:00 variant=ub1024-conc restore_begin rc=0
+2026-09-25T07:03:52+03:00 variant=ub1024-conc restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T07:03:52+03:00 variant=ub2048-b4096 preguard_begin devices=0,1,2
+2026-09-25T07:03:53+03:00 variant=ub2048-b4096 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T07:03:57+03:00 variant=ub2048-b4096 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -b 4096 -ub 2048 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T07:05:38+03:00 variant=ub2048-b4096 health_PASS
+2026-09-25T07:21:22+03:00 variant=ub2048-b4096 restore_begin rc=1
+2026-09-25T07:24:19+03:00 variant=ub2048-b4096 restore_done health=200 llama_count=1 new_xid=0
+2026-09-25T07:24:19+03:00 variant=ub2048-tb12 preguard_begin devices=0,1,2
+2026-09-25T07:24:20+03:00 variant=ub2048-tb12 snapshot services={'llama-qwen.service': True, 'bonsai-2.service': False}
+2026-09-25T07:24:24+03:00 variant=ub2048-tb12 launch cmd=/home/fastchip/llama.cpp-upstream-mmq-a02c7f5/bin/llama-server --model /mnt/usbsata/models/Qwen3.8-27B-UD-Q4_K_XL.gguf --alias Qwen3.8-27B --mmproj /mnt/usbsata/models/mmproj-Qwen3.8-27B-Q8_0.gguf --mmproj-offload --host 0.0.0.0 --port 8081 --parallel 4 --ctx-size 524288 --kv-unified --kv-unified-per-slot 262144 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0 --presence-penalty 0.0 --repeat-penalty 1.0 --flash-attn on --cache-type-k q8_0 --cache-type-v q8_0 --gpu-layers 99 --split-mode layer --tensor-split 1.2,1.2,0.6 --reasoning-effort low -t 6 -tb 6 -b 2048 --api-key-file /etc/llama-server.api-key --cache-ram 16384 -ub 2048 -t 6 -tb 12 --spec-type draft-mtp --spec-draft-n-max 3
+2026-09-25T07:26:56+03:00 variant=ub2048-tb12 health_PASS
+2026-09-25T07:43:36+03:00 variant=ub2048-tb12 bench_PASS
+2026-09-25T07:43:36+03:00 variant=ub2048-tb12 restore_begin rc=0
+2026-09-25T07:46:08+03:00 variant=ub2048-tb12 restore_done health=200 llama_count=1 new_xid=0
