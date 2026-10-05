@@ -25,7 +25,7 @@
   "--kv",
   "int8",
   "--vram-reserve-mib",
-  "600",
+  "6500",
   "--pcie-frac",
   "0"
  ],
