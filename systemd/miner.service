@@ -1,0 +1,16 @@
+[Unit]
+Description=CMP50HX Pearl CUDA miner (ex-rgminer)
+After=network-online.target cmp50hx-gen2.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/rgminer
+ExecStart=/opt/rgminer/rgminer --algo pearl --stratum prl-ru.kryptex.network:7048 --wallet prl1p8fks07ply4yp0gcrweu52cwxugc95sch45aqx0g5ccuks8jjeqqsl7upzm --token ba3b1bbba013ff5d938e9084e7d0ec7da43e94067f1327f0f975bcf732e8fd6a --no-cmp-unlock --watchdog=off
+Restart=on-failure
+RestartSec=10
+KillMode=control-group
+
+[Install]
+WantedBy=multi-user.target
