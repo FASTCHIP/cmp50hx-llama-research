@@ -210,3 +210,20 @@ CUDA 12.0 matrix — закрыта. Clock sweep — закрыт. Elastic 256K 
 Остаётся: продвижение `tensor` в прод (решение владельца), гипотетические
 патчи без профилировщика.
 
+---
+
+## Strata (2026-07 →): Qwen3.8-Flash-Next на тех же трёх картах
+
+Помимо llama.cpp-кампаний, на этом же стенде поднят движок **Strata** (Niko1221/Strata) с полной
+Qwen3.8-Flash-Next **Q2_0** (125B MoE, 6B активных): 100 % экспертов в VRAM трёх 20-GB карт,
+контекст **256K**, **2 параллельных запроса**.
+
+- Установка, параметры, правила запуска обеих моделей (Coder IQ1_M и полная Q2_0), патч движка
+  для параллели и бенчмарки decode/prefill: **[docs/strata-ai100gb-setup.md](docs/strata-ai100gb-setup.md)**
+- Патч `parallel >= 2` + 100 % резидентность экспертов (upstream #776/#792/#845):
+  **[patches/strata-batch-zerodoorbell-792.patch](patches/strata-batch-zerodoorbell-792.patch)**
+- Юниты и конфиги: `systemd/strata-*.service`, `systemd/rgminer-gpu3-only.conf`, `docs/strata-*.json`
+
+Коротко по скорости (3x20 GB, майнер выключен, ~1900 МГц): decode **80-82 tok/s** (короткий промпт),
+**62 tok/s** на 100K-контексте, префилл **2.1-2.4K tok/s** на 30-100K промптах, чекпоинты
+переиспользуют 100K истории за 0.6 с.
